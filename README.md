@@ -27,7 +27,7 @@ npm install
 npm run dev
 
 # 构建生产环境
-npm run build
+npm run build:prod
 ```
 
 #### 反馈交流
