@@ -93,7 +93,7 @@
         <el-table-column v-if="columns.visible('companyname')" prop="companyname" label="公司名称" width="100" />
         <el-table-column v-if="columns.visible('founddate')" prop="founddate" label="成立日期" width="100">
           <template slot-scope="scope">
-            <span>{{ parseTime(scope.row.founddate) }}</span>
+            <span>{{ parseTime(scope.row.founddate).split(" ")[0] }}</span>
           </template>
         </el-table-column>
         <el-table-column v-if="columns.visible('chairman')" prop="chairman" label="法人" width="50" />
