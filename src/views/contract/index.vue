@@ -51,15 +51,15 @@
       <!--表格渲染-->
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
-        <el-table-column v-if="columns.visible('proposer')" prop="proposer" label="申请人" />
-        <el-table-column v-if="columns.visible('subjectType')" prop="subjectType" label="标的物类型" />
-        <el-table-column v-if="columns.visible('subject')" prop="subject" label="标的物" />
-        <el-table-column v-if="columns.visible('number')" prop="number" label="数量" />
-        <el-table-column v-if="columns.visible('money')" prop="money" label="金额" />
-        <el-table-column v-if="columns.visible('supplier')" prop="supplier" label="供应商" />
-        <el-table-column v-if="columns.visible('contractDate')" prop="contractDate" label="合同日期">
+        <el-table-column v-if="columns.visible('proposer')" prop="proposer" label="申请人" width="60" />
+        <el-table-column v-if="columns.visible('subjectType')" prop="subjectType" label="标的物类型" width="100" />
+        <el-table-column v-if="columns.visible('subject')" prop="subject" label="标的物" width="200" />
+        <!-- <el-table-column v-if="columns.visible('number')" prop="number" label="数量" /> -->
+        <el-table-column v-if="columns.visible('money')" prop="money" label="金额" width="100" />
+        <el-table-column v-if="columns.visible('supplier')" prop="supplier" label="供应商" width="200" />
+        <el-table-column v-if="columns.visible('contractDate')" prop="contractDate" label="合同日期" width="100">
           <template slot-scope="scope">
-            <span>{{ parseTime(scope.row.contractDate) }}</span>
+            <span>{{ parseTime(scope.row.contractDate).split(" ")[0] }}</span>
           </template>
         </el-table-column>
         <el-table-column v-if="columns.visible('budget')" prop="budget" label="预算号" />
