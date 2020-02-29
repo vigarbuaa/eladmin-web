@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: 'ELADMIN-后台管理',
+      title: '智库管理系统演示',
       logo: Logo
     }
   }

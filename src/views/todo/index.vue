@@ -1,22 +1,22 @@
 <template>
   <div class="app-container">
+    <!-- https://blog.csdn.net/csdnear/article/details/79467751 -->
     <div class="head-container">To do list Example</div>
     <el-input v-model="input" size="medium" placeholder="帅哥,你打算下一步干点what" clearable @change="addTodo" />
-    <el-row v-for="(item, index) in todos" :key="item.id" class="list-row">
+    <el-row v-for="(item, index) in todos" :key="index" class="list-row">
       <el-col :xs="2" :sm="1" :md="1" :lg="1" :xl="1" class="check" :class="{ red: !todos[index].completed, 'green': todos[index].completed }">
-        <el-checkbox v-model="item.completed" size="mini" />
+        <el-checkbox v-model="item.completed" size="mini" @change="complete(item)" />
       </el-col>
       <el-col :xs="20" :sm="22" :md="22" :lg="22" :xl="22">
         <input v-model="item.content" type="text" class="ipcont" :class="{done: todos[index].completed}">
       </el-col>
       <el-col :xs="2" :sm="1" :md="1" :lg="1" :xl="1" class="close">
-        <i class="el-icon-close" @click="del(index)" />
+        <i class="el-icon-close" @click="del(index,item.id)" />
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-
 import axios from 'axios'
 import {
   getToken
@@ -52,11 +52,38 @@ export default {
       })
   },
   methods: {
-    handleSelectionChange: function(selection) {
-      console.log('toggle work--' + selection)
-      console.log(selection)
-      this.styleObj.color = this.styleObj.color === 'red' ? 'green' : 'red'
+    complete: function(item) {
+      console.log(' complete func : ')
+      console.log(item)
+      const config = {
+        headers: {
+          'Authorization': getToken()
+        }
+      }
+      var completed = item.completed ? 1 : 0
+      axios.put('http://localhost:8000/api/todo/udpateStatus', { 'completed': completed, 'id': item.id }, config)
+        .then(function(response) {
+          console.log(response)
+        }).catch(function(error) {
+          console.log(error)
+        })
     },
+    del: function(index, id) {
+      console.log(' del func : ' + id)
+      const config = {
+        headers: {
+          'Authorization': getToken()
+        }
+      }
+      axios.post('http://localhost:8000/api/todo/del', [id], config)
+        .then(function(response) {
+          console.log(response)
+        }).catch(function(error) {
+          console.log(error)
+        })
+      this.todos.splice(index, 1)
+    },
+
     addTodo: function() {
       let newid = 0
       console.log('add to do triggered!!!' + this.input)
