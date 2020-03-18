@@ -25,7 +25,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import PanelGroup from './dashboard/PanelGroup'
 import LineChart from './dashboard/LineChart'

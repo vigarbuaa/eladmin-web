@@ -41,12 +41,13 @@ export default {
         'Authorization': getToken()
       }
     }
+
     // this.todos
-    axios.get('http://localhost:8000/api/todo', config)
+    axios.get('http://119.27.160.141:8000/api/todo', config)
       .then(function(response) {
-        // console.log(response)
-        // console.log(response.data.content)
-        _this.todos = response.data.content
+        console.log(response)
+        console.log(response.data)
+        _this.todos = response.data
       }).catch(function(error) {
         console.log(error)
       })
@@ -61,7 +62,7 @@ export default {
         }
       }
       var completed = item.completed ? 1 : 0
-      axios.put('http://localhost:8000/api/todo/udpateStatus', { 'completed': completed, 'id': item.id }, config)
+      axios.put('http://119.27.160.141:8000/api/todo/udpateStatus', { 'completed': completed, 'id': item.id }, config)
         .then(function(response) {
           console.log(response)
         }).catch(function(error) {
@@ -75,7 +76,7 @@ export default {
           'Authorization': getToken()
         }
       }
-      axios.post('http://localhost:8000/api/todo/del', [id], config)
+      axios.post('http://119.27.160.141:8000/api/todo/del', [id], config)
         .then(function(response) {
           console.log(response)
         }).catch(function(error) {
@@ -92,7 +93,7 @@ export default {
           'Authorization': getToken()
         }
       }
-      axios.post('http://localhost:8000/api/todo', {
+      axios.post('http://119.27.160.141:8000/api/todo', {
         'content': this.input.trim()
       }, config)
         .then(function(response) {
